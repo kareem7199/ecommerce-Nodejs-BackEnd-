@@ -61,6 +61,7 @@ const ProductImagesUploader = multer({
 
 const uploadProductImages = () => {
   return (req, res, next) => {
+
     const file = ProductImagesUploader.array("images" , 6);
 
     file(req, res, function (err) {
