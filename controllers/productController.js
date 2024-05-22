@@ -17,3 +17,16 @@ export const CreateProduct = async (req, res, next) => {
         next(boom.internal());
     }
 }
+
+export const GetProducts = async (req ,res , next) => {
+    try {
+        
+        const products = await productService.getProducts(req.query.page , req.query.limit , req.query.sort , req.query.category , req.query.minPrice , req.query.maxPrice);
+
+        res.send(products)
+
+    } catch (error) {
+        console.log(error);
+        next(boom.internal());
+    }
+}
