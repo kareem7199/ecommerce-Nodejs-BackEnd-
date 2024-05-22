@@ -1,14 +1,6 @@
 import mongoose from "mongoose";
 import uniqueValidator from 'mongoose-unique-validator';
-
-const Address = new mongoose.Schema({
-    firstName: { type: String, required: true },
-    LastName: { type: String, required: true },
-    phone: { type: String, required: true },
-    street: { type: String, required: true },
-    city: { type: String, required: true },
-    state: { type: String, required: true },
-});
+import Address from './Address.js'
 
 const schema = new mongoose.Schema({
     firstName: {
