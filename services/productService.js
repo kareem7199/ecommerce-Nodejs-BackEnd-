@@ -58,7 +58,7 @@ class ProductService {
 
         const pagination = {
             totalPages: Math.ceil(total / limit),
-            currentPage: page,
+            currentPage: parseInt(page),
             totalItems: total
         };
 
