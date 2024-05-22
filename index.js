@@ -5,6 +5,7 @@ import boom from '@hapi/boom'
 
 import categoryRoutes from './routes/categoryRoutes.js'
 import productRoutes from './routes/productRoutes.js'
+import userRoutes from "./routes/userRoutes.js"
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.json());
 
 app.use("/category" , categoryRoutes);  
 app.use("/product" , productRoutes); 
+app.use("/user" , userRoutes);
 
 
 app.use((err, req, res, next) => {
