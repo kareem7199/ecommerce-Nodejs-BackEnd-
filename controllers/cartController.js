@@ -17,7 +17,7 @@ export const createCart = async (req, res, next) => {
         });
 
     } catch (error) {
-        boom.internal();
+        next(boom.internal())
     }
 }
 
@@ -35,6 +35,6 @@ export const getCart = async (req, res, next) => {
         })
 
     } catch (error) {
-        boom.internal();
+        next(boom.internal())
     }
 }

@@ -7,7 +7,8 @@ import redis from "./redis/client.js"
 import categoryRoutes from './routes/categoryRoutes.js'
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from "./routes/userRoutes.js"
-import cartRoutes from "./routes/cartRouter.js"
+import cartRoutes from "./routes/cartRoutes.js"
+import deliveryMethodRoutes from './routes/deliveryMethodRoutes.js'
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use("/category" , categoryRoutes);
 app.use("/product" , productRoutes); 
 app.use("/user" , userRoutes);
 app.use("/cart" , cartRoutes);
+app.use("/deliverymethod" , deliveryMethodRoutes);
 
 
 app.use((err, req, res, next) => {
