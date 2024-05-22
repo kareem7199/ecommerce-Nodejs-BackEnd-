@@ -2,10 +2,12 @@ import express from "express"
 import mongoose from "mongoose"
 import 'dotenv/config'
 import boom from '@hapi/boom'
+import redis from "./redis/client.js"
 
 import categoryRoutes from './routes/categoryRoutes.js'
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from "./routes/userRoutes.js"
+import cartRoutes from "./routes/cartRouter.js"
 
 const app = express();
 
@@ -14,6 +16,7 @@ app.use(express.json());
 app.use("/category" , categoryRoutes);  
 app.use("/product" , productRoutes); 
 app.use("/user" , userRoutes);
+app.use("/cart" , cartRoutes);
 
 
 app.use((err, req, res, next) => {
@@ -27,7 +30,8 @@ app.use((err, req, res, next) => {
 
 app.listen(5000 , async () => {
 
-    await mongoose.connect(process.env.DBCONNECTION);
+    mongoose.connect(process.env.DBCONNECTION);
+    await redis.connect();
 
     console.log("server is running on port 5000");
 })

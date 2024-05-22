@@ -1,21 +1,16 @@
 import Category from "../models/Category.js";
 
-class CategoryService {
-    async getCategories() {
-        return await Category.find();
-    }
+const getCategories = () => Category.find();
 
-    async getCategory(id) {
-        return await Category.findById(id);
-    }
+const getCategory = id => Category.findById(id);
 
-    async createCategory(category) {
-        return await Category.create(category);
-    }
+const createCategory = category => Category.create(category);
 
-    async updateCategory(id, category) {
-        return await Category.findByIdAndUpdate(id, category , {new : true});
-    }
+const updateCategory = (id, category) => Category.findByIdAndUpdate(id, category, { new: true });
+
+export default {
+    getCategories,
+    getCategory,
+    createCategory,
+    updateCategory
 }
-
-export default new CategoryService();

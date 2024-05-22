@@ -2,43 +2,32 @@ import User from "../models/User.js";
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-class UserService {
-    async getUsers() {
-        return await User.find();
-    }
+const getUsers = () => User.find();
 
-    async getUser(id) {
-        return await User.findById(id);
-    }
+const getUser = id => User.findById(id);
 
-    async getUserByEmail(email) {
-        return await User.findOne({
-            email : email
-        });
-    }
+const getUserByEmail = email => User.findOne({email});
 
-    async logIn(email , password) {
-        const user = await this.getUserByEmail(email);
-        
-        if(!user) {
-            return null;
-        }
-
-        if(!bcryptjs.compareSync(password , user.password)) {
-            return null;
-        }
-
-        return jwt.sign({userId : user._id} , process.env.JWT_SECRET);
-    }
-
-    async createUser(user) {
-        user.password = bcryptjs.hashSync(user.password);
-        return await User.create(user);
-    }
-
-    async updateUser(id, user) {
-        return await User.findByIdAndUpdate(id, user , {new : true});
-    }
+const logIn = (email, password) => {
+    return getUserByEmail(email).then(user => {
+        if(!user) return null;
+        if(!bcryptjs.compareSync(password, user.password)) return null;
+        return jwt.sign({userId : user._id}, process.env.JWT_SECRET);
+    });
 }
 
-export default new UserService();
+const createUser = user => {
+    user.password = bcryptjs.hashSync(user.password);
+    return User.create(user);
+}
+
+const updateUser = (id, user) => User.findByIdAndUpdate(id, user, {new : true});
+
+export default {
+    getUser,
+    getUsers,
+    getUserByEmail,
+    logIn,
+    createUser,
+    updateUser
+}
