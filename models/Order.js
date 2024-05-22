@@ -10,11 +10,29 @@ const schema = new mongoose.Schema({
         required: true
     },
     products: {
-        type: [Product],
+        type: [{
+            name : String,
+            images: [String] ,
+            price: Number,
+            quantity: Number
+        }],
         required: true
     },
     deliveryMethod: {
-        type: DeliveryMethod,
+        type: {
+            name: {
+                type: String,
+                required: true
+            } ,
+            cost: {
+                type: Number,
+                required: true
+            } ,
+            deliveryTime: {
+                type: String,
+                required: true
+            } 
+        } ,
         required: true
     },
     address: {
@@ -26,9 +44,9 @@ const schema = new mongoose.Schema({
         enum: ['pending', 'processed', 'shipped', 'delivered', 'cancelled'],
         default: 'pending',
         required: true
-    } ,
+    },
     paymentIntentId: {
-        type: string,
+        type: String,
         required: true
     },
     total: {
@@ -36,3 +54,7 @@ const schema = new mongoose.Schema({
         required: true
     }
 });
+
+const Order = mongoose.model("Order", schema);
+
+export default Order

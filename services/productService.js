@@ -55,7 +55,10 @@ const getProducts = (page = 1, limit = 10, sort, category, minPrice, maxPrice) =
     });
 };
 
+const getProduct = id => Product.findById(id);
+
 export default {
     createProduct,
-    getProducts
+    getProducts,
+    getProduct
 }

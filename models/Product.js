@@ -21,7 +21,12 @@ const schema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Category",
         required: true
-    }
+    } ,
+    inStock: {
+        type: Number,
+        required: true,
+        default: 0
+      }
 })
 
 const Product = mongoose.model("Product", schema);
