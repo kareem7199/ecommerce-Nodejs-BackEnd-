@@ -14,8 +14,17 @@ const userSchema = Joi.object({
         })
 }).options({ stripUnknown: true });
 
+const loginSchema = Joi.object({
+    email: Joi.string().email().required(),
+    password: Joi.string().required()
+}).options({ stripUnknown: true });
+
 const validateUser = (data) => {
     return userSchema.validate(data, { abortEarly: false });
 };
 
-export { validateUser };
+const validateLogin = (data) => {
+    return loginSchema.validate(data, { abortEarly: false });
+}
+
+export { validateUser , validateLogin};

@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import bcryptjs from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 class UserService {
     async getUsers() {
@@ -14,6 +15,20 @@ class UserService {
         return await User.findOne({
             email : email
         });
+    }
+
+    async logIn(email , password) {
+        const user = await this.getUserByEmail(email);
+        
+        if(!user) {
+            return null;
+        }
+
+        if(!bcryptjs.compareSync(password , user.password)) {
+            return null;
+        }
+
+        return jwt.sign({userId : user._id} , process.env.JWT_SECRET);
     }
 
     async createUser(user) {
