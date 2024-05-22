@@ -6,7 +6,11 @@ class CartRepository {
     }
 
     async createOrUpdateCart(cart) {
-        return await this.client.set(cart.id , JSON.stringify(cart));
+        const ttlInSeconds = 60 * 60 * 24 * 30; // Set TTL to 1 month
+        
+        return await this.client.set(cart.id , JSON.stringify(cart) , {
+            EX: ttlInSeconds
+          });
     }
 
     async getCart(id) {
