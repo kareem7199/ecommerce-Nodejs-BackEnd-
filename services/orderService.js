@@ -8,7 +8,6 @@ const createOrder = async (cart, userId) => {
     // TODO: decrease inStock
     // TODO: delete cart
 
-
     const products = [];
     let totalPrice = 0;
 

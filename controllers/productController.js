@@ -28,9 +28,26 @@ export const GetProducts = async (req ,res , next) => {
         if(data.error)
             next(boom.badRequest(data.error.details.map(err => err.message)))
 
-        const products = await productService.getProducts(req.query.page , req.query.limit , req.query.sort , req.query.category , req.query.minPrice , req.query.maxPrice);
+        const products = await productService.getProducts(req.query.page , req.query.limit , req.query.sort , req.query.category , req.query.minPrice , req.query.maxPrice , req.query.name);
 
         res.send(products)
+
+    } catch (error) {
+        next(boom.internal());
+    }
+}
+
+export const GetProduct = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        
+        const product = await productService.getProduct(id);
+        if (!product) next(boom.notFound("Product not found"));
+        
+        res.send({
+            message : "Product fetched successfully",
+            data : product
+        });
 
     } catch (error) {
         next(boom.internal());

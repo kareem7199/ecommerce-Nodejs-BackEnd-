@@ -1,7 +1,8 @@
 import Joi from 'joi';
 
 const categorySchema = Joi.object({
-  name: Joi.string().required()
+  name: Joi.string().required() ,
+  image: Joi.string().required(),
 }).options({ stripUnknown: true });
 
 const validateCategory = (data) => {

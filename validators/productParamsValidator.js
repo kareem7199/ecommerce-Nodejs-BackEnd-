@@ -10,7 +10,8 @@ const schema = Joi.object({
         is: Joi.number().required(),
         then: Joi.number().min(Joi.ref('minPrice')).optional(),
         otherwise: Joi.number().optional()
-    })
+    }) ,
+    name : Joi.string().optional()
 });
 
 const validateProductParams = (data) => {
